@@ -18,18 +18,19 @@ def stepFunction(soma):
     return 0
 
 def calculaSaida(registro):
-    s = registro.dot(pesos)
-    return stepFunction(s)
+    s = registro.dot(pesos) #recebe um par de entradas, multiplica pelos respectivos pesos e soma
+    return stepFunction(s) #retorna a função de ativação a partir do calculo realizado
 
 def treinar():
     erroTotal = 1
     while(erroTotal != 0):
         erroTotal = 0
         for i in range(len(saidas)):
-            saidaCalculada = calculaSaida(np.asarray(entradas[i]))
-            erro = saidas[i] - saidaCalculada
-            erroTotal += erro
-            for j in range(len(pesos)):
+            saidaCalculada = calculaSaida(np.asarray(entradas[i])) #verifica a saída para o peso atual
+            erro = saidas[i] - saidaCalculada #calcula o erro para o peso atual
+            print("Erro: " +str(erro))
+            erroTotal += erro #soma o erro ?
+            for j in range(len(pesos)): #atualizando os pesos
                 pesos[j] = pesos[j] + (aprendizado*entradas[i][j]*erro)
             print("Peso Atualizado: " +str(pesos))
         print("Total do erro: " +str(erroTotal))
